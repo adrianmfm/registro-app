@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -11,7 +12,7 @@ export class LoginPage implements OnInit {
  
   field:string="";
 
-  constructor(private router: Router) {
+  constructor(private router: Router,  private loadingController: LoadingController) {
     this.usuario = '';
     this.contrasena = '';
   }
@@ -20,13 +21,20 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  ingresar() {
+
+
+  async ingresar() {
     if (this.validateModel({ usuario: this.usuario, contrasena: this.contrasena })) {
       this.field = '';
-      this.router.navigate(['/home']);
-
+      this.showLoading();
+  
+      // Agregar un retraso de 2 segundos (2000 milisegundos)
+      await new Promise(resolve => setTimeout(resolve, 500));
+  
+      await this.router.navigate(['/home']);
     }
   }
+  
   validateModel(model:any){
     // Recorro todas las entradas que me entrega Object entries y obtengo su clave, valor
     for (var [key, value] of Object.entries(model)) {
@@ -40,5 +48,13 @@ export class LoginPage implements OnInit {
     }
     return true;
   }
+  async showLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Iniciando sesión...',
+      duration: 400,
+      spinner: 'circles'
+    });
 
+    await loading.present();
+  }
 }
