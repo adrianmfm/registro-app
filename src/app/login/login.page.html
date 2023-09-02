@@ -4,11 +4,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-text-center" >
-  <img src="assets/images/duoc.png" alt="Mi Imagen" width="300" class="my-custom-image"/>
+<ion-content [fullscreen]="true" class="ion-text-center">
+  <img src="assets/images/duoc.png" alt="Mi Imagen" width="300" class="my-custom-image" />
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title  class="ion-text-center" size="large">Register APP</ion-title>
+      <ion-title class="ion-text-center" size="large">Register APP</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -19,19 +19,19 @@
         <ion-input [(ngModel)]="usuario" name="usuario" required></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="field === 'usuario'">Usuario es requerido.</div>
-      
-      <ion-item >
+
+      <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
         <ion-input [(ngModel)]="contrasena" name="contrasena" type="password" required></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="field === 'contrasena'">Contraseña es requerida.</div>
-      
+
       <ion-button shape="block" (click)="ingresar()">Ingresar</ion-button>
       <a href="/password">Recuperar contraseña</a>
-      
 
-      
+
+
     </div>
   </ion-content>
-  
+
 </ion-content>

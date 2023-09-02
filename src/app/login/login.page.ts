@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -9,16 +10,21 @@ import { LoadingController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   usuario: string;
   contrasena: string;
- 
-  field:string="";
 
-  constructor(private router: Router,  private loadingController: LoadingController) {
+  field: string = "";
+
+  constructor(private router: Router, private loadingController: LoadingController, private authService: AuthService) {
     this.usuario = '';
     this.contrasena = '';
   }
-  
-  
+
+
   ngOnInit() {
+    this.authService.getUserName().subscribe(user => {
+      if (user) {
+        console.log(user.username)
+      }
+    })
   }
 
 
@@ -26,22 +32,24 @@ export class LoginPage implements OnInit {
   async ingresar() {
     if (this.validateModel({ usuario: this.usuario, contrasena: this.contrasena })) {
       this.field = '';
+      const isAuthenticated = await this.authService.login(this.usuario, this.contrasena);
       this.showLoading();
-  
-      // Agregar un retraso de 2 segundos (2000 milisegundos)
-      await new Promise(resolve => setTimeout(resolve, 500));
-  
-      await this.router.navigate(['/home']);
+      await new Promise(resolve => setTimeout(resolve, 2500));
+
+      if (isAuthenticated) {
+        await this.router.navigate(['/home']);
+      } else { }
+      await this.loadingController.dismiss();
     }
   }
-  
-  validateModel(model:any){
+
+  validateModel(model: any) {
     // Recorro todas las entradas que me entrega Object entries y obtengo su clave, valor
     for (var [key, value] of Object.entries(model)) {
       // Si un valor es "" se retornara false y se avisara de lo faltante
-      if (value=="") {
+      if (value == "") {
         // Se asigna el campo faltante
-        this.field=key;
+        this.field = key;
         // Se retorna false
         return false;
       }
@@ -51,7 +59,7 @@ export class LoginPage implements OnInit {
   async showLoading() {
     const loading = await this.loadingController.create({
       message: 'Iniciando sesión...',
-      duration: 400,
+      duration: 2500,
       spinner: 'circles'
     });
 
