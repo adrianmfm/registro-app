@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { UserModel } from '../model/user.model';
-import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,17 +11,22 @@ import { of } from 'rxjs';
 export class HomePage {
   user: UserModel | null = null;
   constructor(private authService: AuthService) {
+    this.ngOnInit();
   }
   ngOnInit() {
-    this.authService.getUserName().pipe(
-      switchMap((user) => {
-        if (user) {
-          console.log(user.username);
-          this.user = user;
-        }
-        return of(user);
-      })
-    ).subscribe();
+    this.authService.getUserName().subscribe(user => {
+      if (user) {
+        console.log(user.username)
+      }
+    })
+    this.authService.getUserName().subscribe(user => {
+      if (user) {
+        this.user = user
+      }
+    })
+
+
   }
+
 
 }
