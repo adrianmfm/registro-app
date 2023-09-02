@@ -34,7 +34,7 @@ export class LoginPage implements OnInit {
       this.field = '';
       const isAuthenticated = await this.authService.login(this.usuario, this.contrasena);
       this.showLoading();
-      await new Promise(resolve => setTimeout(resolve, 2500));
+      await new Promise(resolve => setTimeout(resolve, 500));
 
       if (isAuthenticated) {
         await this.router.navigate(['/home']);
@@ -59,7 +59,7 @@ export class LoginPage implements OnInit {
   async showLoading() {
     const loading = await this.loadingController.create({
       message: 'Iniciando sesión...',
-      duration: 2500,
+      duration: 500,
       spinner: 'circles'
     });
 

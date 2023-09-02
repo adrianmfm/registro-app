@@ -9,9 +9,14 @@ import { switchMap } from 'rxjs';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  user: UserModel | null = null;
+  user: any;
   constructor(private authService: AuthService) {
-    this.ngOnInit();
+    this.authService.getUserName().subscribe(user => {
+      if (user) {
+        this.user = user
+      }
+    })
+
   }
   ngOnInit() {
     this.authService.getUserName().subscribe(user => {
@@ -19,11 +24,7 @@ export class HomePage {
         console.log(user.username)
       }
     })
-    this.authService.getUserName().subscribe(user => {
-      if (user) {
-        this.user = user
-      }
-    })
+
 
 
   }
