@@ -1,4 +1,3 @@
-
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
@@ -6,25 +5,15 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="home">
-        <ion-icon name="play-circle"></ion-icon>
-        Perfil
-      </ion-tab-button>
-      <ion-tab-button tab="radio">
-        <ion-icon name="radio"></ion-icon>
-        Horario
-      </ion-tab-button>
-      <ion-tab-button tab="library">
-        <ion-icon name="library"></ion-icon>
-        Asistencia
-      </ion-tab-button>
-      <ion-tab-button tab="search">
-        <ion-icon name="search"></ion-icon>
-        Salir
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
+  <ion-text class="center-content">
+    Presione escanear qr para marcar su asistencia
+  </ion-text>
+
 </ion-content>
+<ion-footer [translucent]="true" class="footerColor">
+  <ion-button shape="round" size="medium" class="ion-align-self-center" expand="block">
+    Escanear QR
+  </ion-button>
+</ion-footer>
