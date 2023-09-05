@@ -16,7 +16,7 @@
     <div class="ion-margin">
       <ion-item>
         <ion-label position="floating">Usuario</ion-label>
-        <ion-input [(ngModel)]="usuario" name="usuario" required></ion-input>
+        <ion-input [(ngModel)]="usuario" name="usuario" (click)="ingresar" required></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="field === 'usuario'">Usuario es requerido.</div>
 

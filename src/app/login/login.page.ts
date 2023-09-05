@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -13,12 +15,13 @@ export class LoginPage implements OnInit {
 
   field: string = "";
 
-  constructor(private router: Router, private loadingController: LoadingController, private authService: AuthService) {
+  constructor(private router: Router, private loadingController: LoadingController, private authService: AuthService, private alertController: AlertController) {
     this.usuario = '';
     this.contrasena = '';
   }
 
 
+  
   ngOnInit() {
     this.authService.getUserName().subscribe(user => {
       if (user) {
@@ -27,21 +30,39 @@ export class LoginPage implements OnInit {
     })
   }
 
-
+  async presentErrorAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+  
+    await alert.present();
+  }
+  
 
   async ingresar() {
-    if (this.validateModel({ usuario: this.usuario, contrasena: this.contrasena })) {
+    if (!this.validateModel({ usuario: this.usuario, contrasena: this.contrasena })) {
+      return;
+    }
+  
+    if (this.usuario.endsWith("@duocuc.cl")) {
       this.field = '';
-      const isAuthenticated = await this.authService.login(this.usuario, this.contrasena);
       this.showLoading();
+      const isAuthenticated = await this.authService.login(this.usuario, this.contrasena);
       await new Promise(resolve => setTimeout(resolve, 2500));
-
+      
       if (isAuthenticated) {
         await this.router.navigate(['/home']);
-      } else { }
+      }
+      
       await this.loadingController.dismiss();
+    } else {
+      await this.presentErrorAlert('Error', 'Ingrese un correo electrónico válido.');
     }
   }
+  
+  
 
   validateModel(model: any) {
     // Recorro todas las entradas que me entrega Object entries y obtengo su clave, valor

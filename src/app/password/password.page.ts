@@ -19,11 +19,6 @@ export class PasswordPage {
       return;
     }
 
-    // Lógica para enviar un correo de recuperación (simulado)
-    // Aquí podrías agregar la lógica para enviar un correo electrónico real
-    // y luego redirigir al usuario al login
-
-    // Simulación: Esperar unos segundos antes de redirigir
     setTimeout(async () => {
       await this.presentConfirmationAlert('Contraseña Enviada', 'Se ha enviado un correo de recuperación a tu dirección de correo electrónico.');
       this.router.navigate(['/login']);
