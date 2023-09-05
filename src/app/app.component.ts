@@ -12,14 +12,15 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit {
   private authSubscription: Subscription | undefined;
   constructor(private authService: AuthService, private router: Router) { }
+
   ngOnInit() {
-    // this.authService.getAuthToken().then(authToken => {
-    //   if (authToken) {
-    //     this.router.navigate(['/home']);
-    //   } else {
-    //     this.router.navigate(['/login']);
-    //   }
-    // });
+    this.authService.getAuthToken().then(authToken => {
+      if (authToken) {
+        this.router.navigate(['/home']);
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
 
   }
 }

@@ -1,9 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Bienvenido {{user?.username}}
+      Bienvenido
     </ion-title>
+    <ion-buttons slot="end" class="ion-padding" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </ion-buttons>
   </ion-toolbar>
+  <div style="text-align: center;">
+    {{user?.username}}
+  </div>
 </ion-header>
 
 <ion-content>

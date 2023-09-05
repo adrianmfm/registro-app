@@ -4,18 +4,25 @@ import { LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { AlertController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+
   usuario: string;
   contrasena: string;
-
+  showSpinner: boolean = false;
   field: string = "";
 
-  constructor(private router: Router, private loadingController: LoadingController, private authService: AuthService, private alertController: AlertController) {
+  constructor(
+    private router: Router,
+    private loadingController: LoadingController,
+    private authService: AuthService,
+    private alertController: AlertController) {
     this.usuario = '';
     this.contrasena = '';
   }
@@ -82,7 +89,6 @@ export class LoginPage implements OnInit {
     const loading = await this.loadingController.create({
       message: 'Iniciando sesión...',
       duration: 500,
-      spinner: 'circles'
     });
 
     await loading.present();

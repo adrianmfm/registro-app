@@ -25,7 +25,7 @@
         <ion-input label="" [(ngModel)]="contrasena" name="contrasena" type="password" required></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="field === 'contrasena'">Contraseña es requerida.</div>
-
+      <mat-spinner *ngIf="showSpinner" diameter="40"></mat-spinner>
       <ion-button shape="block" (click)="ingresar()">Ingresar</ion-button>
       <a href="/password">Recuperar contraseña</a>
 

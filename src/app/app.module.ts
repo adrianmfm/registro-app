@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +17,10 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     AppRoutingModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    MatIconModule],
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatDialogModule],
+
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
