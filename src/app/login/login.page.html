@@ -16,13 +16,13 @@
     <div class="ion-margin">
       <ion-item>
         <ion-label position="floating">Usuario</ion-label>
-        <ion-input [(ngModel)]="usuario" name="usuario" (click)="ingresar" required></ion-input>
+        <ion-input label="" [(ngModel)]="usuario" name="usuario" required></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="field === 'usuario'">Usuario es requerido.</div>
 
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
-        <ion-input [(ngModel)]="contrasena" name="contrasena" type="password" required></ion-input>
+        <ion-input label="" [(ngModel)]="contrasena" name="contrasena" type="password" required></ion-input>
       </ion-item>
       <div class="error-message" *ngIf="field === 'contrasena'">Contraseña es requerida.</div>
 

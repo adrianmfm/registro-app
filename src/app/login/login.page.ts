@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
   }
 
 
-  
+
   ngOnInit() {
     this.authService.getUserName().subscribe(user => {
       if (user) {
@@ -36,33 +36,34 @@ export class LoginPage implements OnInit {
       message: message,
       buttons: ['OK']
     });
-  
+
     await alert.present();
   }
-  
+
 
   async ingresar() {
     if (!this.validateModel({ usuario: this.usuario, contrasena: this.contrasena })) {
       return;
     }
-  
+
     if (this.usuario.endsWith("@duocuc.cl")) {
       this.field = '';
       this.showLoading();
       const isAuthenticated = await this.authService.login(this.usuario, this.contrasena);
-      await new Promise(resolve => setTimeout(resolve, 2500));
-      
+      this.showLoading();
+      await new Promise(resolve => setTimeout(resolve, 500));
+
       if (isAuthenticated) {
         await this.router.navigate(['/home']);
       }
-      
+
       await this.loadingController.dismiss();
     } else {
       await this.presentErrorAlert('Error', 'Ingrese un correo electrónico válido.');
     }
   }
-  
-  
+
+
 
   validateModel(model: any) {
     // Recorro todas las entradas que me entrega Object entries y obtengo su clave, valor
@@ -80,7 +81,7 @@ export class LoginPage implements OnInit {
   async showLoading() {
     const loading = await this.loadingController.create({
       message: 'Iniciando sesión...',
-      duration: 2500,
+      duration: 500,
       spinner: 'circles'
     });
 

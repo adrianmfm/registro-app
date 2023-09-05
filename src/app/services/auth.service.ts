@@ -64,9 +64,17 @@ export class AuthService {
   authStatusChanged$: Observable<boolean> = this.authStatusSubject.asObservable();
   async isTokenValid(): Promise<boolean> {
     const authToken = await this.storage.get(this.authTokenKey);
-
-    // Check if the token exists, and assume it's valid if it does
     return !!authToken;
+  }
+  async logout(): Promise<void> {
+    this.isAuthenticated = false;
+    await Promise.all([
+      this.storage.remove(this.authTokenKey),
+      this.storage.remove(this.userKey),
+    ]);
+  }
+  async clearStorage(): Promise<void> {
+    await this.storage.clear();
   }
 
 }

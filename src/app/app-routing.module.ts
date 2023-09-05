@@ -12,19 +12,18 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    // canActivate: [AuthGuard],
     pathMatch: 'full'
   },
 
   {
     path: 'login',
-    // canActivate: [AuthGuard],
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'password',
     loadChildren: () => import('./password/password.module').then(m => m.PasswordPageModule)
   },
+
 ];
 
 @NgModule({
