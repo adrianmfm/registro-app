@@ -26,13 +26,9 @@ export class LoginPage implements OnInit {
     this.contrasena = '';
   }
 
-  ngOnInit() {
-    this.authService.getUserName().subscribe(user => {
-      if (user) {
-        console.log(user.username)
-      }
-    })
-  }
+
+
+  ngOnInit() { }
 
   async presentErrorAlert(header: string, message: string) {
     const alert = await this.alertController.create({

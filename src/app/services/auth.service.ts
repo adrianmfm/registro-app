@@ -32,7 +32,7 @@ export class AuthService {
     const isAuthenticated = true;
 
     if (isAuthenticated) {
-      const authToken = 'example-token';
+      const authToken = 'token';
       const user = new UserModel(1, username, authToken);
       this.isAuthenticated = true;
       await Promise.all([

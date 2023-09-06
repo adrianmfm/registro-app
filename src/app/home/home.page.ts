@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { UserModel } from '../model/user.model';
-import { switchMap } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -22,15 +20,8 @@ export class HomePage {
     })
 
   }
-  ngOnInit() {
-    this.authService.getUserName().subscribe(user => {
-      if (user) {
-        console.log(user.username)
-      } else {
-        this.router.navigate(['/login']);
-      }
-    })
-  }
+  ngOnInit() { }
+
   async logout() {
     const confirmAlert = await this.alertController.create({
       header: 'Confirmar',

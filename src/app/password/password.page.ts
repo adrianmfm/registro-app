@@ -11,7 +11,7 @@ import { AlertController } from '@ionic/angular'; // Importa AlertController
 export class PasswordPage {
   email: string = '';
 
-  constructor(private router: Router, private alertController: AlertController,) {}
+  constructor(private router: Router, private alertController: AlertController,) { }
 
   async sendRecoveryEmail() {
     if (!this.isValidEmail(this.email)) {
@@ -22,7 +22,7 @@ export class PasswordPage {
     setTimeout(async () => {
       await this.presentConfirmationAlert('Contraseña Enviada', 'Se ha enviado un correo de recuperación a tu dirección de correo electrónico.');
       this.router.navigate(['/login']);
-    }, 1000); // Redirigir después de 2 segundos
+    }, 1000);
   }
 
   isValidEmail(email: string): boolean {
@@ -31,7 +31,7 @@ export class PasswordPage {
     }
     return false;
   }
-  
+
 
   async presentErrorAlert(header: string, message: string) {
     const alert = await this.alertController.create({
