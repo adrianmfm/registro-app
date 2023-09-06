@@ -12,7 +12,6 @@ import { AlertController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-
   usuario: string;
   contrasena: string;
   showSpinner: boolean = false;
@@ -26,8 +25,6 @@ export class LoginPage implements OnInit {
     this.usuario = '';
     this.contrasena = '';
   }
-
-
 
   ngOnInit() {
     this.authService.getUserName().subscribe(user => {

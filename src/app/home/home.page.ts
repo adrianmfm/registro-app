@@ -26,6 +26,8 @@ export class HomePage {
     this.authService.getUserName().subscribe(user => {
       if (user) {
         console.log(user.username)
+      } else {
+        this.router.navigate(['/login']);
       }
     })
   }
