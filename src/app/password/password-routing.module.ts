@@ -8,15 +8,15 @@ const routes: Routes = [
   {
     path: '',
     component: PasswordPage
-  }, 
-  {
-    path: 'login', 
-    component: LoginPage
-  } 
+  },
+  // {
+  //   path: 'login', 
+  //   component: LoginPage
+  // } 
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PasswordPageRoutingModule {}
+export class PasswordPageRoutingModule { }

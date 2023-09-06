@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +8,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  private authSubscription: Subscription | undefined;
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
-    this.authService.getAuthToken().then(authToken => {
-      if (authToken) {
-        this.router.navigate(['/home']);
-      } else {
-        this.router.navigate(['/login']);
-      }
-    });
-
-  }
+  ngOnInit() { }
 }
