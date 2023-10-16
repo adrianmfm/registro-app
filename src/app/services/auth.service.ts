@@ -3,6 +3,7 @@ import { UserModel } from '../model/user.model';
 import { Storage } from '@ionic/storage-angular'
 import { Observable, from, BehaviorSubject, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { application } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -29,22 +30,33 @@ export class AuthService {
     await this.storage.create();
   }
   async login(username: string, password: string): Promise<boolean> {
-    const isAuthenticated = true;
+    const url = 'http://127.0.0.1:5000/login'
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        'username': username,
+        'password': password
+      })
+    })
 
-    if (isAuthenticated) {
-      const authToken = 'token';
-      const user = new UserModel(1, username, authToken);
-      this.isAuthenticated = true;
+    if (response.ok) {
+      this.isAuthenticated = true
+      const responseBody = await response.json(); 
+      const authToken = responseBody.token; 
+      const user = new UserModel(1, username, authToken)
       await Promise.all([
         this.storage.set(this.authTokenKey, authToken),
         this.storage.set(this.userKey, user)
       ]);
-
       return Promise.resolve(true);
     } else {
       return Promise.resolve(false);
     }
   }
+
   isAuthenticatedUser(): boolean {
     return this.isAuthenticated;
   }

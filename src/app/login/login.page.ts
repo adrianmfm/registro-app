@@ -56,6 +56,9 @@ export class LoginPage implements OnInit {
       if (isAuthenticated) {
         await this.router.navigate(['/home']);
       }
+      else {
+        await this.presentErrorAlert('Error', 'Credenciales incorrectas')
+      }
 
       await this.loadingController.dismiss();
     } else {

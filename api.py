@@ -1,7 +1,8 @@
 import flask
 from sqlalchemy import create_engine, MetaData, Table
-
+from flask_cors import CORS
 app = flask.Flask(__name__)
+CORS(app)
 
 engine = create_engine('sqlite:///users.db', echo=True)
 
