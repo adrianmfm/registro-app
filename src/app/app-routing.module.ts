@@ -26,7 +26,14 @@ const routes: Routes = [
     path: 'password',
     loadChildren: () => import('./password/password.module').then(m => m.PasswordPageModule)
   },
-
+  {
+    path: 'not-found',
+    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+  {
+    path: '**', 
+    redirectTo: 'not-found' // Redirige a la página de error 404
+  }
 ];
 
 @NgModule({
