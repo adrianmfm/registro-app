@@ -45,21 +45,21 @@ export class LoginPage implements OnInit {
     if (!this.validateModel({ usuario: this.usuario, contrasena: this.contrasena })) {
       return;
     }
-
+  
     if (this.usuario.endsWith("@duocuc.cl")) {
       this.field = '';
       this.showLoading();
       const isAuthenticated = await this.authService.login(this.usuario, this.contrasena);
-      this.showLoading();
-      await new Promise(resolve => setTimeout(resolve, 500));
-
+      // this.showLoading(); // Elimina esta línea
+      // await new Promise(resolve => setTimeout(resolve, 500)); // Elimina esta línea
+  
       if (isAuthenticated) {
         await this.router.navigate(['/home']);
       }
       else {
         await this.presentErrorAlert('Error', 'Credenciales incorrectas')
       }
-
+  
       await this.loadingController.dismiss();
     } else {
       await this.presentErrorAlert('Error', 'Ingrese un correo electrónico válido.');
