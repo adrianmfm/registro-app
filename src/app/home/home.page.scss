@@ -19,3 +19,17 @@
   height: 100%;
   text-align: center;
 }
+
+
+.camera-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Adjust the height as needed */
+  overflow: hidden;
+}
+
+.camera-feed {
+  max-width: 100%; /* Limits the width of the video to the container */
+  /* Adjust as needed to maintain aspect ratio or fill the screen */
+}

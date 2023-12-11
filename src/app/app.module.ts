@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
+import '@ionic/pwa-elements';
 
 @NgModule({
   declarations: [AppComponent],

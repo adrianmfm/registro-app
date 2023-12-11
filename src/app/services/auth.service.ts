@@ -88,7 +88,30 @@ export class AuthService {
   async clearStorage(): Promise<void> {
     await this.storage.clear();
   }
-
+  async sendData(data: string, token: string): Promise<void> {
+    const url = 'http://127.0.0.1:5000/asistencia';
+    try {
+      const payload = JSON.parse(data);
+      payload['token'] = token;
+      console.log(payload);
+  
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Error sending data:', error);
+      throw error; 
+    }
+  }
+  
 }
 
 

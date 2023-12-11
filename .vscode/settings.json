@@ -1,0 +1,11 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "registro",
+      "database": "${workspaceFolder:registro-app}/users.db"
+    }
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive"
+}

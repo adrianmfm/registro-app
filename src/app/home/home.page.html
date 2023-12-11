@@ -15,14 +15,17 @@
   </div>
 </ion-header>
 
-<ion-content>
-  <ion-text class="center-content">
-    Presione escanear QR para marcar su asistencia
-  </ion-text>
+<ion-content class="center-content ion-padding">
+  <div>
+    <p>Escanear QR</p>
+  </div>
+  <div class="camera-container">
+  <video #videoElement autoplay></video>
+  </div>
 
 </ion-content>
 <ion-footer [translucent]="true" class="footerColor">
-  <ion-button shape="round" size="medium" class="ion-align-self-center" expand="block">
+  <ion-button (click)="sendData()" [disabled] ="!latestQRCode" shape="round" size="medium" class="ion-align-self-center" expand="block">
     Escanear QR
   </ion-button>
 </ion-footer>
