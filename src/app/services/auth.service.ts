@@ -30,7 +30,7 @@ export class AuthService {
     await this.storage.create();
   }
   async login(username: string, password: string): Promise<boolean> {
-    const url = 'http://127.0.0.1:5000/login'
+    const url = 'http://qr-lb-service-2067904649.us-east-1.elb.amazonaws.com/login'
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -89,7 +89,7 @@ export class AuthService {
     await this.storage.clear();
   }
   async sendData(data: string, token: string): Promise<void> {
-    const url = 'http://127.0.0.1:5000/asistencia';
+    const url = 'http://qr-lb-service-2067904649.us-east-1.elb.amazonaws.com/asistencia';
     try {
       const payload = JSON.parse(data);
       payload['token'] = token;

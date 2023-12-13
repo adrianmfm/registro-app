@@ -5,9 +5,15 @@ from flask_cors import CORS
 import qrcode
 from io import BytesIO
 from datetime import datetime
+import logging
+import sys
 
 app = flask.Flask(__name__)
 CORS(app)
+
+logger = logging.getLogger()
+handler = logging.StreamHandler(sys.stdout)
+logger.addHandler(handler)
 
 engine = create_engine('sqlite:///users.db', echo=True)
 
@@ -59,7 +65,7 @@ def asistencia():
     token = data.get('token')
     user = queryGetUserByToken(token)
     if token == user["token"]:
-        print(f"El usuario {user['nombre']} {user['apellido']} ha marcado asistencia en {data.get('clase')} a las {datetime.now().strftime('%H:%M')}")
+        logger.info(f"El usuario {user['nombre']} {user['apellido']} ha marcado asistencia en {data.get('clase')} a las {datetime.now().strftime('%H:%M')}")
         return 'Ok',200 
         
     else:
@@ -86,5 +92,9 @@ def qr():
     img_bytes.seek(0)
     return flask.send_file(img_bytes, mimetype='image/png')
 
+@app.route('/healthcheck', methods=['GET'])
+def health():
+    return flask.jsonify({"message": "app running"}), 200
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0', port=5000)
